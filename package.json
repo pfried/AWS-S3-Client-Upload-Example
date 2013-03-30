@@ -1,0 +1,20 @@
+{
+    "name"    : "AWS_TEST",
+    "version" : "0.0.1",
+    "private" : true,
+    
+    "author"  : {
+        "name" : "Friedrich Mäckle",
+        "email": "friedrich.maeckle@online.de"
+    },
+    
+    "private" : true,
+    
+    "dependencies" : {
+      "express"    : "3.1.0",
+      "knox"       : "0.6.0",
+      "jade"       : "0.28.2",
+      "mime"       : "1.2.9"
+    }
+    
+}

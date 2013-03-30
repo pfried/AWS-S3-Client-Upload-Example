@@ -1,0 +1,26 @@
+!!! 5
+html(lang = "en")
+
+  head
+    script(type='text/javascript', src='js/jquery-1.9.1.min.js')
+    script(type='text/javascript', src='js/upload.js')
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/main.css')
+
+  body
+    .container
+      .well
+        h1 Amazon S3 Client Upload / Download example
+        form(action="https://#{bucket}.s3.amazonaws.com/", method="post", enctype="multipart/form-data").form-upload
+          fieldset
+            input#key(type="hidden", name="key")
+            input#AWSKey(type="hidden", name="AWSAccessKeyId")
+            input#acl(type="hidden", name="acl")
+            input#successRedirect(type="hidden", name="success_action_redirect", value="/")
+            input#policy(type="hidden", name="policy")
+            input#signature(type="hidden", name="signature")
+            input#contentType(type="hidden", name="Content-Type")
+          fieldset
+            input#file(type="file", name="file")
+            input(type="submit", value="Send file to Amazon S3").btn.btn-primary
+            
