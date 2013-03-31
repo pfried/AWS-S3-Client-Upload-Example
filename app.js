@@ -1,8 +1,10 @@
+// Require dependencies
 var knox    = require('knox');
 var express = require('express');
 var fs      = require('fs');
 var crypto  = require('crypto');
 var mime    = require('mime');
+// Require the configuration
 var config  = require('./config.json');
 
 // Create the app
@@ -21,6 +23,7 @@ var createPolicy = function () {
 	var _date = new Date();
 	// The policy object
 	var policy = {
+		// Set the expiration date 1 hour to the future
 		expiration: "" + (_date.getFullYear()) + "-" + (_date.getMonth() + 1) + "-" + (_date.getDate()) + "T" + (_date.getHours() + 1) + ":" + (_date.getMinutes()) + ":" + (_date.getSeconds()) + "Z",
 		conditions: [
 			{ bucket: config.bucket },
@@ -85,8 +88,20 @@ app.get('/', function (req, res) {
 
 // Get a list of all files
 app.get('/files', function (req, res) {
+	// Get a list of all keys (files) in the bucket
 	s3client.list(function (err, data) {
-		res.send(data);
+		var files = [];
+		var date = new Date();
+		// Set valid date to 30s in the future
+		date.setTime(date.getTime() + 30 * 1000);
+		// Create a url for each file in the bucket
+		data.Contents.forEach(function (content) {
+			// Use knox's sign url function
+			content.url = s3client.signedUrl(content.Key, date);
+			files.push(content);
+		});
+		// Send the list of files to the client
+		res.send(files);
 	})
 });
 

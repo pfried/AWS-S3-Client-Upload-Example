@@ -1,4 +1,33 @@
+// Get the file list from the server
+var getFiles = function () {
+	
+	$.ajax({
+		url : '/files',
+		type : 'GET',
+		success : function (contents) {
+			
+			// Clear the files container
+			$('#fileList').html('');
+			
+			contents.forEach(function (content) {
+				$('#fileList').append(
+					'<div class="row">'
+					+ '<div class="span2">' + content.Key + '</div>'
+					+ '<div class="span2"><a href="' + content.url + '">' + content.Key + '</a></div>'
+					+ '<div class="span2">' + content.Owner.DisplayName + '</div>'
+					+ '<div class="span4">' + content.LastModified + '</div>'
+					+ '</div>'
+				);
+			});
+			
+		}
+	});
+};
+
+
 $(document).ready(function() {
+	
+	getFiles();
 	
 	// Adding an event handler to the form
 	$('form.form-upload').submit(function (e) {

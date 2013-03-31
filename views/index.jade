@@ -3,7 +3,7 @@ html(lang = "en")
 
   head
     script(type='text/javascript', src='js/jquery-1.9.1.min.js')
-    script(type='text/javascript', src='js/upload.js')
+    script(type='text/javascript', src='js/s3.js')
     link(rel='stylesheet', href='css/bootstrap.min.css')
     link(rel='stylesheet', href='css/main.css')
 
@@ -11,6 +11,11 @@ html(lang = "en")
     .container
       .well
         h1 Amazon S3 Client Upload / Download example
+        .files
+          h2 Your files in Amazon's S3 bucket #{bucket}:
+          #fileList
+        hr
+        h2 Upload a new file to the Bucket
         form(action="https://#{bucket}.s3.amazonaws.com/", method="post", enctype="multipart/form-data").form-upload
           fieldset
             input#key(type="hidden", name="key")

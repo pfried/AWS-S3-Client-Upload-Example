@@ -17,7 +17,15 @@ Using jQuery's ajax for uploading the file to S3.
 ### Customization
 To use this demo create your own config.json file following the sampleConfig.json file.
 
+### Getting it started
+Create a AWS Account, create Credentials and set up a S3 bucket
+Create your own config.json file
+Install the modules via `npm install` in the project folder
+Start the app via `node app.js`
+
 ## Credits
 http://blog.tcs.de/post-file-to-s3-using-node/
+
 https://npmjs.org/package/s3-policy
+
 http://aws.amazon.com/articles/1434
