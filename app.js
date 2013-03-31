@@ -105,6 +105,19 @@ app.get('/files', function (req, res) {
 	})
 });
 
+// We can forward requested elements to S3 too
+app.get('/files/:file', function (req, res) {
+	var file = req.params.file;
+	if (file) {
+		var date = new Date();
+		// Set valid date to 5s in the future
+		date.setTime(date.getTime() + 5 * 1000);
+		res.redirect(s3client.signedUrl(file, date));		
+	} else {
+		res.send(404);
+	}
+});
+
 // Get a pre-authorization / policy
 app.get('/policy', function (req, res) {
 	// Create a new policy object
